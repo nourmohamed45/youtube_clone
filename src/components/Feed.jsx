@@ -3,18 +3,15 @@ import { Box, Stack, Typography } from "@mui/material";
 import { Sidebar, Videos } from "./";
 import { fetchFromAPI } from "../utils/fetchFromAPI";
 
-
 function Feed() {
-  const [selectedCategory, setSelectedCategory] = useState("New");
+  const [selectedCategory, setSelectedCategory] = useState("Islam");
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    fetchFromAPI(`search?part=snippet&q=${selectedCategory}`)
-    .then((data) => {
-      setVideos(data.items)
-    })
-  }, [selectedCategory])
-  
+    fetchFromAPI(`search?part=snippet&q=${selectedCategory}`).then((data) => {
+      setVideos(data.items);
+    });
+  }, [selectedCategory]);
 
   return (
     <Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
@@ -26,7 +23,7 @@ function Feed() {
           px: { sx: 0, md: 2 },
         }}
       >
-        <Sidebar 
+        <Sidebar
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
@@ -49,7 +46,7 @@ function Feed() {
           {selectedCategory} <span style={{ color: "#F31503" }}>videos</span>
         </Typography>
 
-        <Videos videos={videos}/>
+        <Videos videos={videos} />
       </Box>
     </Stack>
   );
